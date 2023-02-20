@@ -1,0 +1,1 @@
+console.log("Client size javascript file loaded.")

@@ -40,6 +40,20 @@ app.get('/help',(req,res)=>{
         help:'Allah helps',
     })
 })
+app.get('/help/*',(req,res)=>{
+    res.render('error',{
+        title:'Help sub folder not found',
+        name:'Sara'
+    })
+})
+app.get('*',(req,res)=>{
+    res.render('error',{
+        title:'404 error found',
+        name:'Sara'
+    })
+})
+
+
 /*app.get('',(req,res)=>{
     res.send('<h1>BISMILLAH!!</h1>')//app.com
 })

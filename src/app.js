@@ -1,7 +1,9 @@
 //npm i hbs@4.0.1
 //Express documentation->Api Reference
+//nodemon src/app.js -e js.hbs
 const express=require('express')
 const path=require('path')
+const hbs=require('hbs')
 console.log(__dirname)
 console.log()
 const app=express()
@@ -9,11 +11,13 @@ const app=express()
 //define paths for express config
 const pathhtml=path.join(__dirname,'../public')
 //customizing views
-const viewpath=path.join(__dirname,'../templates')
+const viewpath=path.join(__dirname,'../templates/views')
+const partialspath=path.join(__dirname,'../templates/partials')
 
 //set up handlebars, engines and views location
 app.set('view engine','hbs')
 app.set('views',viewpath)
+hbs.registerPartials(partialspath)
 
 //set up static directory to serve
 app.use(express.static(pathhtml))
@@ -32,6 +36,7 @@ app.get('/about',(req,res)=>{
 app.get('/help',(req,res)=>{
     res.render('help',{
         title:"Help",
+        name:'sara',
         help:'Allah helps',
     })
 })

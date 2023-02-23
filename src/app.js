@@ -68,8 +68,8 @@ app.get('/weather',(req,res)=>{
             if(error){
                 return res.send({error:'error found'})
             }
-            console.log(Location)
-            console.log(forcastdata)
+            // console.log(Location)
+            // console.log(forcastdata)
             res.send({location:Location,
             data:forcastdata})
         })

@@ -1,6 +1,9 @@
 //npm i hbs@4.0.1
 //Express documentation->Api Reference
 //nodemon src/app.js -e js,hbs
+//npm i request@2.88.0
+const forecast=require('../utils/forecast')
+const geocode=require('../utils/geolocator')
 const express=require('express')
 const path=require('path')
 const hbs=require('hbs')
@@ -57,9 +60,20 @@ app.get('/weather',(req,res)=>{
     if(!req.query.address){
         return res.send({error:'Address not found'})
     }
-    res.send({
-        forecast:'It is sunny', address: req.query.address
-})
+    geocode(req.query.address,(error, {Latitude,Longitude,Location}={})=>{
+        if(error){
+            return res.send({error:'error found'})
+        }
+        forecast(Latitude, Longitude, (error, forcastdata) => {
+            if(error){
+                return res.send({error:'error found'})
+            }
+            console.log(Location)
+            console.log(forcastdata)
+            res.send({location:Location,
+            data:forcastdata})
+        })
+      }) 
 })
 app.get('*',(req,res)=>{
     res.render('error',{

@@ -1,11 +1,10 @@
 //npm i hbs@4.0.1
 //Express documentation->Api Reference
-//nodemon src/app.js -e js.hbs
+//nodemon src/app.js -e js,hbs
 const express=require('express')
 const path=require('path')
 const hbs=require('hbs')
-console.log(__dirname)
-console.log()
+//console.log(__dirname)
 const app=express()
 
 //define paths for express config
@@ -46,6 +45,22 @@ app.get('/help/*',(req,res)=>{
         name:'Sara'
     })
 })
+app.get('/products',(req,res)=>{
+    if(!req.query.search){
+        return res.send({error:'Search not found'})
+    }
+     res.send({
+        products:[]
+     })
+})
+app.get('/weather',(req,res)=>{
+    if(!req.query.address){
+        return res.send({error:'Address not found'})
+    }
+    res.send({
+        forecast:'It is sunny', address: req.query.address
+})
+})
 app.get('*',(req,res)=>{
     res.render('error',{
         title:'404 error found',
@@ -63,9 +78,6 @@ app.get('/help',(req,res)=>{
 app.get('/about',(req,res)=>{
     app.use(express.static(pathhtml))
 })*/
-app.get('/weather',(req,res)=>{
-    app.use(express.static(pathhtml))
-})
 app.listen(3000,()=>{
     console.log("Running on port 3000")
 })

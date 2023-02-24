@@ -10,6 +10,10 @@ console.log("Client size javascript file loaded.")
 
 const weatherform= document.querySelector('form')
 const search=document.querySelector('input')
+const messageOne=document.querySelector('#message-1')//id is targeted using #, class is targeted using .
+const messageTwo=document.querySelector('#message-2')
+messageOne.textContent='loading...'
+messageTwo.textContent=''
 const res=weatherform.addEventListener('submit',(e)=>{
     e.preventDefault()
     const location=search.value
@@ -21,6 +25,8 @@ const res=weatherform.addEventListener('submit',(e)=>{
        else{
         console.log(data.location)
         console.log(data.data)
+        messageOne.textContent=data.location
+        messageTwo.textContent=data.data
        }
     })
 })

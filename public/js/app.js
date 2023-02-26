@@ -23,8 +23,8 @@ const res=weatherform.addEventListener('submit',(e)=>{
         console.log(data.error)
        }
        else{
-        console.log(data.location)
-        console.log(data.data)
+        // console.log(data.location)
+        // console.log(data.data)
         messageOne.textContent=data.location
         messageTwo.textContent=data.data
        }
